@@ -1,0 +1,11 @@
+# Cofiguration file for commandpad.py
+
+quit_keycode: 24
+modifier_keycode: 69
+
+- name: "Human readable name"
+  keycode: 83
+  cmds1:
+    - echo Keycode 83 triggered!
+    - echo Second command triggered by keycode 83!
+  cmds2: echo Keycode 83 triggered with modifier!
