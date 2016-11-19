@@ -1,0 +1,98 @@
+# Cofiguration file for commandpad.py
+# required:
+# q_keycode: number
+# modifier_keycode: number
+#
+#- name: "Human readable name"
+#  keycode: 83
+#  cmds1: echo Keycode 83 triggered!
+#  cmds2: echo Keycode 83 triggered with modifier!
+
+name: Layout settings for NOVATEK keypad
+
+# if this is toggled cmds2 is triggered
+q_keycode: 24
+modifier_keycode: 69
+
+command_list:
+
+###################################
+# key commands with second level
+
+- name: "Num ,"
+  keycode: 83
+  cmds2: /usr/bin/curl -d '{ "id":1, "jsonrpc":"2.0", "method":"Player.Stop", "params":{ "playerid":1 }}' -H 'Content-Type:application/json' http://pi:8080/jsonrpc
+  cmds1: /usr/bin/mpc --host pi stop
+
+- name: "Num 0"
+  keycode: 82
+  cmds2: /usr/bin/curl -d '{ "id":1, "jsonrpc":"2.0", "method":"Player.playpause", "params":{ "playerid":1 }}' -H 'Content-Type:application/json' http://pi:8080/jsonrpc
+  cmds1: /usr/bin/mpc --host pi toggle
+
+- name: "Num 1"
+  keycode: 79
+  cmds2: /usr/bin/curl -d '{"jsonrpc":"2.0","method":"Input.subtitledelay","id":"keypad"}' -H 'content-type:application/json;' http://pi:8080/jsonrpc
+  cmds1: /usr/bin/mpc --host pi random
+
+- name: "Num 2"
+  keycode: 80
+  cmds2: /usr/bin/curl -d '{"jsonrpc":"2.0","method":"Input.Down","id":"keypad"}' -H 'content-type:application/json;' http://pi:8080/jsonrpc
+  cmds1: /usr/bin/mpc --host pi volume -5
+
+- name: "Num 3"
+  keycode: 81
+  cmds2: /usr/bin/curl -d '{"jsonrpc":"2.0","method":"Input.Back","id":"keypad"}' -H 'content-type:application/json;' http://pi:8080/jsonrpc
+  cmds1: /usr/bin/mpc --host pi repeat
+
+- name: "Num 4"
+  keycode: 75
+  cmds2: /usr/bin/curl -d '{"jsonrpc":"2.0","method":"Input.Left","id":"keypad"}' -H 'content-type:application/json;' http://pi:8080/jsonrpc
+  cmds1: /usr/bin/mpc --host pi prev
+
+- name: "Num 5"
+  keycode: 76
+  cmds2: /usr/bin/curl -d '{"jsonrpc":"2.0","method":"Input.Select","id":"keypad"}' -H 'content-type:application/json;' http://pi:8080/jsonrpc
+  cmds1: /usr/bin/mpc --host pi volume +5
+
+- name: "Num 6"
+  keycode: 77
+  cmds2: /usr/bin/curl -d '{"jsonrpc":"2.0","method":"Input.Right","id":"keypad"}' -H 'content-type:application/json;' http://pi:8080/jsonrpc
+  cmds1: /usr/bin/mpc --host pi next
+
+- name: "Num 7"
+  keycode: 71
+  cmds2: /usr/bin/curl -d '{"jsonrpc":"2.0","method":"Input.Home","id":"keypad"}' -H 'content-type:application/json;' http://pi:8080/jsonrpc
+
+- name: "Num 8"
+  keycode: 72
+  cmds2: /usr/bin/curl -d '{"jsonrpc":"2.0","method":"Input.Up","id":"keypad"}' -H 'content-type:application/json;' http://pi:8080/jsonrpc
+
+- name: "Num 9"
+  keycode: 73
+  cmds2: /usr/bin/curl -d '{"jsonrpc":"2.0","method":"Input.ContextMenu","id":"keypad"}' -H 'content-type:application/json;' http://pi:8080/jsonrpc
+
+###################################
+# key commands without second level
+
+#- name: "Num /"
+#  keycode: 98
+#  cmds1: echo
+
+- name: "Num *"
+  keycode: 55
+  cmds1: "systemctl reboot"
+
+- name: "Num -"
+  keycode: 74
+  cmds1: "systemctl poweroff -i"
+
+- name: "Num +"
+  keycode: 78
+  cmds1: 
+  - /usr/bin/mpc --host pi update Neues_hier_rein
+  - /usr/bin/curl -d '{"id":1,"jsonrpc":"2.0","method":"GUI.ShowNotification","params":{"title":"Music Player Daemon","message":"Update Neues_hier_rein"}}' -H "accept:application/json" -H "content-type:application/json" -X POST http://pi:8080/jsonrpc
+  - /usr/bin/curl -d '{"jsonrpc":"2.0","method":"VideoLibrary.Scan","id":"keypad"}' -H 'content-type:application/json;' http://pi:8080/jsonrpc
+
+- name: "Num Enter"
+  keycode: 96
+  cmds1: /usr/bin/curl -d '{"jsonrpc":"2.0","method":"GUI.ActivateWindow","params":{ "window":"favourites" },"id":"keypad"}' -H 'content-type:application/json;' http://pi:8080/jsonrpc
