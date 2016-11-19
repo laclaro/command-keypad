@@ -50,7 +50,7 @@ class Controller:
             for event in self.input_device.read():
                 # only track key down events
                 if event.type == ecodes.EV_KEY and event.value == 1:
-                    if event.code == self.config["q_keycode"]:
+                    if event.code == self.config["quit_keycode"]:
                         # q pressed => quit
                         print("q pressed")
                     else:
@@ -71,7 +71,7 @@ class Controller:
                                         if not os.system(cmd) == 0:
                                             print("Command: \'%s\' failed!" % cmd)
                                         else:
-                                            print(cmd)
+                                            print("%s triggered!" % command["name"])
                                     action_triggered = True
                                     break
                                 except KeyError:
