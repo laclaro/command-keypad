@@ -1,0 +1,2 @@
+# trigger systemd service if command-keypad device is inserted
+KERNEL=="event*", SUBSYSTEM=="input", ATTRS{name}=="NOVATEK  USB Keypad", SYMLINK+="command-keypad", GROUP="root", TAG+="systemd", ENV{SYSTEMD_WANTS}+="command-keypad.service"
