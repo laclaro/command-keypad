@@ -1,4 +1,4 @@
-# Cofiguration file for commandpad.py
+# Cofiguration file for command-keypad.py
 
 quit_keycode: 24
 modifier_keycode: 69
