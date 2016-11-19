@@ -12,7 +12,7 @@ Make sure you have a linux system with python installed. In particular the scrip
 	
 Now you can run the controller with the sample configuration file:
 
-	sudo ./command-keypad.py -c layout-novatek.yaml
+	sudo ./command-keypad.py -c conf/simpleconfig.yaml
 	
 The evdev library captures the keyboard input on device level and needs root privileges. The above command will search for all available input devices and list them:
 
@@ -24,12 +24,29 @@ The evdev library captures the keyboard input on device level and needs root pri
 	  
 Select your keyboard and add the device to the command line:
 
-	sudo ./command-keypad.py -c layout-novatek.yaml -i /dev/input/event2
+	sudo ./command-keypad.py -c conf/simpleconfig.yaml -i /dev/input/event2
 	
-The controller will play the first scene. You should see the DMX values change in ola_dmxmonitor. Try changing scenes with the number keys. If you press a key that is not mapped to a scene, the key code will be displayed, so that you can configure this key in the yaml file.
+The script will now listen to your keyboard inputs. Try pressing a key to execute the mapped command. If you press a key that is not mapped, the key code will be displayed, so that you can configure this key in the yaml file.
 
-Press 'q' to quit.
+Press 'q' to quit (see `quit_keycode` below).
 
 Configuration
 -------------
 
+The key-to-command-mapping is configured by a text file in YAML format. The best idea is to start of from one of the configuration files within the conf/ directory. The key values are described in the following.
+
+* `#` is the line comment character.
+
+* `quit_keycode` denotes the keycode for executing the script.
+
+* `modifier_keycode` identifies the modifier that enables you to switch between the two command set levels cmds1 and cmds2. This may be the numlock toggle on a small keypad.
+
+The key-to-command-mappings are then listed in the command_list they have several key values in common:
+
+* `name` is the human readable name of the mapping.
+
+* `keycode` is the keycode that will trigger this command set. The easiest way to find key codes is to start the script and press the keys you want to use. If these keys are not already mapped to a command, the script will display the key code. You can then enter this code into the configuration file.
+
+* `cmds1` is a single or even a list of shell commands that will be executed whenever the mapped key is pressed.
+
+* `cmds2` is essentially the same as cmds1 but these commands will be triggered if the modifier key defined by modifier_keycode is toggeled.
