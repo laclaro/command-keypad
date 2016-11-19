@@ -30,6 +30,8 @@ The script will now listen to your keyboard inputs. Try pressing a key to execut
 
 Press 'q' to quit (see `quit_keycode` below).
 
+To have it run automatically whenever the dedicated keyboard or keypad device is connected, you may use the example udevd and systemd configuration files, `999-command-keypad.rules` and `command-keypad.service`.
+
 Configuration
 -------------
 
