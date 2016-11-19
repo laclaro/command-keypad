@@ -1,6 +1,6 @@
 # Cofiguration file for commandpad.py
 # required:
-# q_keycode: number
+# quit_keycode: number
 # modifier_keycode: number
 #
 #- name: "Human readable name"
@@ -11,7 +11,7 @@
 name: Layout settings for NOVATEK keypad
 
 # if this is toggled cmds2 is triggered
-q_keycode: 24
+quit_keycode: 24
 modifier_keycode: 69
 
 command_list:
