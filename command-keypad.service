@@ -1,11 +1,10 @@
 [Unit]
 Description=command-keypad daemon
-After=syslog.target dev-input-by\x2did-usb\x2dNOVATEK_USB_Keypad\x2devent\x2dkbd.device
-BindsTo=dev-input-by\x2did-usb\x2dNOVATEK_USB_Keypad\x2devent\x2dkbd.device
+After=syslog.target
 
 [Service]
 Type=simple
-ExecStart=/opt/command-keypad/command-keypad.py -c /opt/command-keypad/layout-novatek.yaml -i /dev/input/by-id/usb-NOVATEK_USB_Keypad-event-kbd
+ExecStart=/opt/command-keypad/command-keypad.py -c /opt/command-keypad/conf/simpleconfig.yaml -i /dev/command-keypad
 StandardOutput=syslog
 StandardError=syslog
 
